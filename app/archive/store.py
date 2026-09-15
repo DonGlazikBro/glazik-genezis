@@ -15,3 +15,14 @@ class ArchiveStore:
 
     def list_all(self) -> list[ArchiveObject]:
         return list(self._objects.values())
+
+    def search(self, query: str) -> list[ArchiveObject]:
+        """Search Archive Objects by title and content."""
+        query = query.lower().strip()
+
+        return [
+            obj
+            for obj in self._objects.values()
+            if query in obj.title.lower()
+            or query in obj.content.lower()
+        ]
