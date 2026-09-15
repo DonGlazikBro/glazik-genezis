@@ -35,3 +35,26 @@ def test_list_all():
     store.add(obj2)
 
     assert store.list_all() == [obj1, obj2]
+
+def test_search():
+    store = ArchiveStore()
+
+    obj1 = ArchiveObject(
+        id="test-1",
+        type="note",
+        title="GENEZIS",
+        content="Archive system",
+    )
+
+    obj2 = ArchiveObject(
+        id="test-2",
+        type="note",
+        title="Python",
+        content="Programming language",
+    )
+
+    store.add(obj1)
+    store.add(obj2)
+
+    assert store.search("genezis") == [obj1]
+    assert store.search("programming") == [obj2]
